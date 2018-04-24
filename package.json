@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "test:coverage": "NODE_ENV=test jest --coverage ./test/**/*.spec.js",
-    "test:unit": "NODE_ENV=test jest --coverage ./test/unit/**/*.spec.js",
+    "test:unit": "NODE_ENV=test jest --coverage ./test/unit/**/**/*.spec.js",
     "test:integration": "NODE_ENV=test jest --coverage --runInBand ./test/integration/**/*.spec.js",
     "test": "npm run test:coverage",
     "dev": "nodemon server",

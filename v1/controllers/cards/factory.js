@@ -20,7 +20,7 @@ module.exports = ({
     },
     formatters: {
       formatCard: formatters.formatCard,
-      formatCreated: formatters.formatCreated
+      formatResponse: formatters.formatResponse
     },
     onSuccess: data => response.status(201).json(data),
     onError: onError(response)

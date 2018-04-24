@@ -2,9 +2,9 @@
 
 const sinon = require('sinon')
 
-const create = require('../../v1/adapters/cards/create')
+const create = require('../../../../v1/adapters/cards/create')
 
-const createStub = require('./stub/create-card-stub.json')
+const createStub = require('./../../stub/create-card-stub.json')
 
 const clone = obj => Object.assign({}, obj)
 

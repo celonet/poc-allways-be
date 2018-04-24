@@ -6,11 +6,11 @@ const {
 } = require('./format-card');
 
 const {
-  formatCreated
+  formatResponse
 } = require('./format-response');
 
 module.exports = {
   formatCard,
   formatListCards,
-  formatCreated
+  formatResponse
 }
