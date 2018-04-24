@@ -1,0 +1,152 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a simplified documentation on how to use All Ways API.",
+      "version": "1.0.0",
+      "title": "All Ways",
+      "contact": {
+        "email": "@concrete.com.br"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/v1",
+    "tags": [
+      {
+        "name": "Cards",
+        "description": "Everything about Cards"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/card": {
+        "post": {
+          "tags": [
+            "Cards"
+          ],
+          "summary": "Add a new card",
+          "description": "",
+          "operationId": "addCard",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Card object that needs to be added to the AllWays",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Card"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/cards": {
+        "get": {
+          "tags": [
+            "Cards"
+          ],
+          "summary": "List of the cards",
+          "description": "",
+          "operationId": "listCard",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "page",
+              "type": "string",
+              "description": "Page to list Cards",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "limit",
+              "type": "string",
+              "description": "Limit of the Cards perPage",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "subject",
+              "type": "string",
+              "description": "Subject of the Cards",
+              "required": false
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Card": {
+        "type": "object",
+        "required": [
+          "subject",
+          "description",
+          "chapter",
+          "category"
+        ],
+        "properties": {
+          "subject": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "chapter": {
+            "$ref": "#/definitions/Chapter"
+          },
+          "category": {
+            "$ref": "#/definitions/Category"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "required": [
+          "name",
+          "initials"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Chapter": {
+        "type": "object",
+        "required": [
+          "name",
+          "initials"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "initials": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }

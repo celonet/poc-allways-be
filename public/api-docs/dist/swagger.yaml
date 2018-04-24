@@ -1,0 +1,281 @@
+swagger: "2.0"
+info:
+  description: "This is a simplified documentation on how to use ZssN API."
+  version: "1.0.0"
+  title: "Survivors running to death"
+  contact:
+    email: "alemanoelsilva@gmail.com"
+host: "localhost:3000"
+basePath: "/v1"
+tags:
+- name: "Survivor"
+  description: "Everything about Survivor"
+- name: "Change"
+  description: "Make, track and authorize exchanges"
+- name: "Report"
+  description: "Generate Reports of Survivors"
+schemes:
+- "http"
+paths:
+  /survivor:
+    post:
+      tags:
+      - "Survivor"
+      summary: "Add a new survivor"
+      description: ""
+      operationId: "addSurvivor"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Survivor object that needs to be added to the ZssN"
+        required: true
+        schema:
+          $ref: "#/definitions/Survivor"
+      responses:
+        400:
+          description: "Invalid input"
+  /survivor/{idSurvivor}/isInfected:
+    patch:
+      tags:
+      - "Survivor"
+      summary: "Infected an survivor"
+      description: ""
+      operationId: "isInfected"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor"
+        required: true
+      responses:
+        400:
+          description: "Invalid input"
+  /survivor/{idSurvivor}/location:
+    patch:
+      tags:
+      - "Survivor"
+      summary: "Location an survivor"
+      description: ""
+      operationId: "location"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor"
+        required: true
+      responses:
+        400:
+          description: "Invalid input"
+  /survivor/{idSurvivor}/inventory:
+    get:
+      tags:
+      - "Survivor"
+      summary: "Inventory an survivor"
+      description: ""
+      operationId: "inventory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor"
+        required: true
+      responses:
+        400:
+          description: "Invalid input"
+  /survivor/requestedChange/{idSurvivor}:
+    post:
+      tags:
+      - "Change"
+      summary: "Create Change"
+      description: ""
+      operationId: "requestedChange"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "id"
+        type: "string"
+        description: "Id of Survivor Origin"
+        required: true
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor Destiny"
+        required: true
+      - in: "body"
+        name: "body"
+        description: "Change object that needs to be added to the ZssN"
+        required: true
+        schema:
+          $ref: "#/definitions/Change" 
+      responses:
+        400:
+          description: "Invalid input"
+  /survivor/requestedChanges/{idSurvivor}:
+    get:
+      tags:
+      - "Change"
+      summary: "Change list requested"
+      description: ""
+      operationId: "requestedChanges"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor"
+        required: true
+      responses:
+        400:
+          description: "Invalid input" 
+  /survivor/authorizationChange/{idSurvivor}:
+    put:
+      tags:
+      - "Change"
+      summary: "Authorization Change"
+      description: ""
+      operationId: "authorizationChange"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "id"
+        type: "string"
+        description: "Id of Survivor Destiny"
+        required: true
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor Origin"
+        required: true
+      responses:
+        400:
+          description: "Invalid input"      
+  /survivor/cancelChange/{idSurvivor}:
+    put:
+      tags:
+      - "Change"
+      summary: "Cancel Change"
+      description: ""
+      operationId: "cancelChange"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "id"
+        type: "string"
+        description: "Id of Survivor Destiny"
+        required: true
+      - in: "path"
+        name: "idSurvivor"
+        type: "string"
+        description: "Id of Survivor Origin"
+        required: true
+      responses:
+        400:
+          description: "Invalid input"   
+  /survivor/requestReport:
+    get:
+      tags:
+      - "Report"
+      summary: "Generate Report"
+      description: ""
+      operationId: "requestReport"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        400:
+          description: "Invalid input"   
+definitions:
+  Location: 
+    type: "object"
+    required:
+    - "latitude"
+    - "longitude"
+    properties:
+      latitude:
+        type: "integer"
+        example: 0.0   
+      longitude:
+        type: "integer"
+        example: 0.0  
+  Inventory: 
+    type: "object"
+    properties:
+      water:
+        type: "integer"
+        example: 0  
+      food:
+        type: "integer"
+        example: 0
+      medication:
+        type: "integer"
+        example: 0  
+      ammunition:
+        type: "integer"
+        example: 0
+  Survivor:
+    type: "object"
+    required:
+    - "name"
+    - "age"
+    - "sex"
+    - "location"
+    - "inventory"
+    properties:
+      name:
+        type: "string"
+        example: "Alexandre Manoel da Silva"
+      age:
+        type: "integer"
+      sex:
+        type: "string"
+        enum:
+        - "male"
+        - "female"
+      infected:
+        type: "boolean"
+        enum:
+        - "true"
+        - "false"
+      location:
+        $ref: "#/definitions/Location"
+      inventory:
+        $ref: "#/definitions/Inventory"
+  Change:
+    type: "object"
+    required:
+    - "inventoryOrigin"
+    - "inventoryDestiny"
+    properties:
+      inventoryOrigin:
+        $ref: "#/definitions/Inventory"
+      inventoryDestiny:
+        $ref: "#/definitions/Inventory"

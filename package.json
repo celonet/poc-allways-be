@@ -1,0 +1,71 @@
+{
+  "name": "pock-backend",
+  "version": "1.0.0",
+  "description": "Pock backend",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node scripts/create-key.js",
+    "start": "npm run seed && node server",
+    "dev": "nodemon server",
+    "test": "NODE_ENV=test jest --runInBand ./test/*",
+    "test:coverage": "NODE_ENV=test jest --runInBand --coverage",
+    "test:unit": "NODE_ENV=test jest ./test/unit",
+    "test:integration": "NODE_ENV=test jest --runInBand ./test/integration",
+    "lint": "eslint v1/**/**/*.js",
+    "lint:fix": "eslint v1/**/**/*.js --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "joi": "^13.1.2",
+    "moment": "^2.20.1",
+    "mongodb": "^3.0.6",
+    "mongoose": "^5.0.15",
+    "swagger-jsdoc": "^1.9.7",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "chai": "^4.1.1",
+    "eslint": "^4.4.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "jest-context": "^2.1.0",
+    "joi-assert": "0.0.3",
+    "mocha": "^3.2.0",
+    "mochawesome": "^2.0.2",
+    "nodemon": "^1.12.1",
+    "sinon": "^4.2.2",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "v1/**/*.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 65,
+        "functions": 65,
+        "lines": 65,
+        "statements": 65
+      }
+    },
+    "setupFiles": [
+      "jest-context/setup"
+    ]
+  }
+}
