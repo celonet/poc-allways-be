@@ -1,4 +1,32 @@
-extends: standard
+globals:
+  describe: true
+  expect: true
+  it: true
+extends: airbnb-base
+# overrides aribnb's default
+parser: babel-eslint
+parserOptions:
+  ecmaVersion: 6 # airbnb = 2017 or 8 - we use 2015 or 6
+  sourceType: strict # airbnb = module - we use require()
+  ecmaFeatures:
+    impliedStrict: false # import doesn't needs 'use strict' - require() do
+rules:
+  comma-dangle: off
+  import/no-unresolved: off
+  no-underscore-dangle: off
+  no-plusplus: off
+  newline-per-chained-call: off
+  no-confusing-arrow:
+    - error
+    - allowParens: true
+  no-param-reassign:
+    - error
+    - props: false
+  strict: # in order to this setting work, the following must be true: {sourceType:script} and {ecmaFeatures.impliedStrict: false}
+    - error
+    - global
 env:
+  es6: true
+  mocha: true
   node: true
   jest: true

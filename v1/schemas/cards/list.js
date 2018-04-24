@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const Joi = require('joi')
+const Joi = require('joi');
 
 const listSchema = Joi.object({
   cards: Joi.object({
@@ -17,6 +17,6 @@ const listSchema = Joi.object({
     create_date: Joi.string().required()
   }).required(),
   total: Joi.number().required()
-})
+});
 
-module.exports = listSchema
+module.exports = listSchema;

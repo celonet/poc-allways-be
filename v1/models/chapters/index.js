@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
+'use strict';
 
-const { Schema } = mongoose
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const Chapter = new Schema({
   name: {
@@ -15,6 +17,6 @@ const Chapter = new Schema({
     minlength: 2,
     maxlength: 4
   }
-}, { collection: 'chapter' })
+}, { collection: 'chapter' });
 
-module.exports = mongoose.model('chapter', Chapter)
+module.exports = mongoose.model('chapter', Chapter);

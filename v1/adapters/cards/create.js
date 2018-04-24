@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = async ({
   logger,
@@ -8,18 +8,18 @@ module.exports = async ({
   onSuccess,
   onError
 }) => {
-  logger.info(`Payload received`, payload)
+  logger.info('Payload received', payload);
 
   try {
-    const { formatCard, formatCreated } = formatters
+    const { formatCard, formatCreated } = formatters;
 
-    await repository.insert(formatCard(payload))
+    await repository.insert(formatCard(payload));
 
     return onSuccess(formatCreated(
       { message: 'Card created with success', statusCode: 201 }
-    ))
+    ));
   } catch (error) {
-    logger.error('There is an error in the creation of cards', error)
-    return onError(error)
+    logger.error('There is an error in the creation of cards', error);
+    return onError(error);
   }
-}
+};

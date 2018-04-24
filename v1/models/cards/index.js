@@ -1,6 +1,8 @@
-const mongoose = require('mongoose')
+'use strict';
 
-const { Schema } = mongoose
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const Card = new Schema({
   chapter: {
@@ -35,8 +37,8 @@ const Card = new Schema({
     minlength: 2,
     maxlength: 80
   }
-}, { collection: 'card' })
+}, { collection: 'card' });
 
-Card.index({ chapter: 1, category: 1, subject: 1 }, { unique: true })
+Card.index({ chapter: 1, category: 1, subject: 1 }, { unique: true });
 
-module.exports = mongoose.model('card', Card)
+module.exports = mongoose.model('card', Card);

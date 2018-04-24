@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const getQueryToFilter = obj => {
-  const { limit, page, sort, ...query } = obj
-  return query
-}
+const getQueryToFilter = (obj) => {
+  const { limit, page, sort, ...query } = obj;
+  return query;
+};
 
 module.exports = ({
   adapters,
@@ -43,4 +43,4 @@ module.exports = ({
     onSuccess: data => response.status(200).json(data),
     onError: onError(response)
   })
-})
+});

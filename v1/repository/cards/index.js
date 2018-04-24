@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const factory = require('../factory')
+const factory = require('../factory');
 
 module.exports = ({ model }) => ({
   ...factory({ model }),
@@ -10,12 +10,12 @@ module.exports = ({ model }) => ({
       .populate('chapter')
       .populate('category')
       .limit(limit)
-      .skip((page - 1) * limit)
+      .skip((page - 1) * limit);
   },
   findById(id) {
     return model
       .findById(id)
       .populate('chapter')
-      .populate('category')
+      .populate('category');
   },
-})
+});

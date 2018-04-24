@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = async ({
   logger,
@@ -8,20 +8,20 @@ module.exports = async ({
   onSuccess,
   onError
 }) => {
-  logger.info(`Get list of Cards`, params)
+  logger.info('Get list of Cards', params);
 
   try {
-    const { formatListCards } = formatters
-    const { query, limit, page } = params
+    const { formatListCards } = formatters;
+    const { query, limit, page } = params;
 
     const [cards, count] = await Promise.all([
       repository.findMany({ query, limit, page }),
       repository.count(query)
-    ])
+    ]);
 
-    return onSuccess({ cards: formatListCards(cards), total: count })
+    return onSuccess({ cards: formatListCards(cards), total: count });
   } catch (error) {
-    logger.error('There is an error to get a list of cards', error)
-    return onError(error)
+    logger.error('There is an error to get a list of cards', error);
+    return onError(error);
   }
-}
+};
