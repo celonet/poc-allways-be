@@ -2,16 +2,16 @@
   "name": "pock-backend",
   "version": "1.0.0",
   "description": "Pock backend",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
-    "test:coverage": "NODE_ENV=test jest --coverage ./test/**/*.spec.js",
-    "test:unit": "NODE_ENV=test jest --coverage ./test/unit/**/**/*.spec.js",
-    "test:integration": "NODE_ENV=test jest --coverage --runInBand ./test/integration/**/*.spec.js",
+    "test:coverage": "NODE_ENV=test jest --runInBand --coverage ./test/**/*.spec.js",
+    "test:unit": "NODE_ENV=test jest --coverage ./test/unit/*.spec.js",
+    "test:integration": "NODE_ENV=test jest --runInBand --coverage ./test/integration/*.spec.js",
     "test": "npm run test:coverage",
     "dev": "nodemon server",
-    "lint": "eslint v1/**/**/*.js",
-    "lint:fix": "eslint v1/**/**/*.js --fix",
+    "lint": "eslint api/**/**/*.js",
+    "lint:fix": "eslint api/**/**/*.js --fix",
     "precommit": "npm run lint:fix",
     "prepush": "npm run test"
   },
@@ -30,6 +30,7 @@
   "devDependencies": {
     "babel-eslint": "8.0.3",
     "babel-cli": "^6.24.1",
+    "chai": "^4.1.0",
     "eslint-config-airbnb-base": "^11.3.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "eslint": "^4.4.1",
@@ -39,14 +40,18 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
+    "mocha": "^4.0.1",
     "jest": "^22.4.3",
+    "nyc": "^11.3.0",
     "jest-context": "^2.1.0",
     "nodemon": "^1.12.1",
     "sinon": "^4.2.2"
   },
   "jest": {
+    "verbose": true,
+    "setupTestFrameworkScriptFile": "./test/integration/setup.js",
     "collectCoverageFrom": [
-      "v1/**/*.js",
+      "api/**/*.js",
       "!**/node_modules/**",
       "!**/config/**"
     ],

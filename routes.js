@@ -10,9 +10,9 @@ const {
   createCardSchema,
   listCardsSchema,
   findCardsSchema
-} = require('./v1/schemas')
+} = require('./api/schemas')
 
-const { cardFactory } = require('./v1/controllers')
+const { cardFactory } = require('./api/controllers')
 
 module.exports = (app) => {
   const {
@@ -20,13 +20,13 @@ module.exports = (app) => {
     listCards
   } = cardFactory
 
-  app.post('/v1/card',
+  app.post('/api/card',
     payloadValidation(createCardSchema),
     createCard
   )
 
-  app.get('/v1/cards',
-    paramsValidation(findCardsSchema),
+  app.get('/api/cards',
+    // paramsValidation(findCardsSchema),
     listCards,
     responseValidation(listCardsSchema)
   )

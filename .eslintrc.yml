@@ -1,7 +1,9 @@
 globals:
   describe: true
   expect: true
-  it: true
+  test: true
+  beforeAll: true
+  afterAll: true
 extends: airbnb-base
 # overrides aribnb's default
 parser: babel-eslint
@@ -27,6 +29,5 @@ rules:
     - global
 env:
   es6: true
-  mocha: true
   node: true
   jest: true

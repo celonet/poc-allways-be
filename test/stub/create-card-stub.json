@@ -1,0 +1,6 @@
+{
+	"subject": "Assunto",
+	"description": "descrição com mais de 50 caracteres não sei porque, mas deve ter tudo isso ",
+	"chapter": "UUID of Chapter",
+	"category": ["UUID_1 of Category", "UUID_2 of Category"]
+}
