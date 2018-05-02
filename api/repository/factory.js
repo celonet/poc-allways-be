@@ -17,11 +17,11 @@ module.exports = ({ model }) => ({
   findById(id) {
     return model.findById(id)
   },
-  updateMany(query = {}, obj = {}, options = { new: true, multi: true }) {
-    return model.update(query, obj, options)
+  updateMany({ query = {}, data = {}, options = { new: true, multi: true } } = {}) {
+    return model.update(query, data, options)
   },
-  updateOne(query = {}, obj = {}, options = { new: false }) {
-    return model.update(query, obj, options)
+  updateOne({ query = {}, data = {}, options = { new: false } } = {}) {
+    return model.update(query, data, options)
   },
   destroy(query = {}) {
     return model.remove(query)

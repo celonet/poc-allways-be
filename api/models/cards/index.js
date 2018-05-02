@@ -9,10 +9,10 @@ const Card = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'chapter'
   },
-  category: [{
+  category: {
     type: Schema.Types.ObjectId,
     ref: 'category'
-  }],
+  },
   subject: {
     type: String,
     required: true,

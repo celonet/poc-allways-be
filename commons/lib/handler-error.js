@@ -1,6 +1,6 @@
 'use strict'
 
-exports.error = (error, request, response, next) => {
+module.exports = response => (error) => {
   if (error.isJoi) {
     response.status(400).json({
       data: {},

@@ -20,13 +20,12 @@ module.exports = ({
     },
     formatters: {
       formatCard: formatters.formatCard,
-      formatResponse: formatters.formatResponse
     },
-    onSuccess: data => response.status(201).json(data),
+    onSuccess: (data = {}) => response.status(201).json({ data, error: null }),
     onError: onError(response)
   }),
 
-  listCards: (request, response) => adapters.listCards({
+  listCards: (request, response, next) => adapters.listCards({
     logger,
     repository: {
       findMany: repository.findMany,
@@ -40,7 +39,11 @@ module.exports = ({
       page: request.query.page,
       query: getQueryToFilter(request.query)
     },
-    onSuccess: data => response.status(200).json(data),
+    onSuccess: (data) => {
+      response.data = data;
+      response.statusCode = 200;
+      return next();
+    },
     onError: onError(response)
   })
 });

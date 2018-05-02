@@ -9,7 +9,7 @@ const adapters = require('../adapters');
 
 const defaultDependencies = {
   logger: require('../../commons/lib/logger'),
-  onError: require('../../middlewares/error')
+  onError: require('../../commons/lib/handler-error')
 };
 
 const cardFactory = require('./cards/factory')({

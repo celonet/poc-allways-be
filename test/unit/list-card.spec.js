@@ -24,7 +24,7 @@ describe('Unit tests', () => {
         page: 1,
       }
     },
-    onSuccess: obj => obj,
+    onSuccess: (data = {}) => ({ data, error: null}),
     onError: err => ({
       name: err.name || 'IntervalServerError',
       message: err.message || 'internal server error',
@@ -39,13 +39,14 @@ describe('Unit tests', () => {
 
       mock.logger.info = sinon.spy()
 
-      const { cards, total } = await list(mock)
+      const { data: { cards, count }, error } = await list(mock)
 
       expect(mock.logger.info.called).toEqual(true)
       expect(mock.logger.info.calledOnce).toEqual(true)
 
       expect(cards.length).toEqual(5)
-      expect(total).toEqual(10)
+      expect(count).toEqual(10)
+      expect(error).toEqual(null)
 
       cards.forEach((card, index) => {
         expect(card._id).toEqual('UUID')

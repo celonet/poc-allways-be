@@ -20,13 +20,13 @@ module.exports = (app) => {
     listCards
   } = cardFactory
 
-  app.post('/api/card',
+  app.post('/api/cards',
     payloadValidation(createCardSchema),
     createCard
   )
 
   app.get('/api/cards',
-    // paramsValidation(findCardsSchema),
+    paramsValidation(findCardsSchema),
     listCards,
     responseValidation(listCardsSchema)
   )

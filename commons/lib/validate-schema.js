@@ -2,26 +2,40 @@
 
 const Joi = require('joi')
 
-exports.payloadValidation = schema => (request, response, next) => {
+const payloadValidation = schema => (request, response, next) => {
   const { error } = Joi.validate(request.body, schema)
 
-  next(error)
+  return next(error)
 }
 
-exports.paramsValidation = schema => (request, response, next) => {
-  const { error } = Joi.validate(request.query, schema)
+const paramsValidation = schema => (request, response, next) => {
+  const { error, value } = Joi.validate(request.query, schema)
+  if (error) return next(error)
 
-  next(error)
+  request.query = value
+  return next()
 }
 
-exports.headersValidation = schema => (request, response, next) => {
+const headersValidation = schema => (request, response, next) => {
   const { error } = Joi.validate(request.headers, schema)
 
-  next(error)
+  return next(error)
 }
 
-exports.responseValidation = schema => (request, response, next) => {
+const responseValidation = schema => (request, response, next) => {
   const { error } = Joi.validate(response.data, schema)
 
-  next(error)
+  if (error) return next(error)
+
+  return response
+    .status(response.statusCode || 200)
+    .json({ data: response.data, error: null })
+    .end()
+}
+
+module.exports = {
+  payloadValidation,
+  paramsValidation,
+  headersValidation,
+  responseValidation
 }

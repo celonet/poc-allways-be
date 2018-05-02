@@ -2,6 +2,8 @@
 
 const moment = require('moment')
 
+const { env } = require('../../config')
+
 const COLORS = {
   RED: '\x1b[31m',
   MAGENTA: '\x1b[35m',
@@ -11,20 +13,16 @@ const COLORS = {
 
 const getDate = () => moment().format('MMMM Do YYYY, h:mm:ss a')
 
-const validateArg = arg => typeof arg === 'object'
-
-const validateObjects = (...objs) => 
-  objs.map(obj => 
-    validateArg(obj) ? ` ${JSON.stringify(obj)}` : ` ${obj}`)
-
-module.exports = {
+const logger = {
   info: (...args) => {
-    console.log(`${COLORS.WHITE}`, `${getDate()} ${validateObjects(args)}`)
+    console.log(`${COLORS.WHITE}`, `${getDate()} ${JSON.stringify(args)}`)
   },
   warn: (...args) => {
-    console.log(`${COLORS.BLUE}`, `${getDate()} ${validateObjects(args)}`)
+    console.log(`${COLORS.BLUE}`, `${getDate()} ${JSON.stringify(args)}`)
   },
   error: (...args) => {
-    console.log(`${COLORS.RED}`, `${getDate()} ${validateObjects(args)}`)
+    console.log(`${COLORS.RED}`, `${getDate()} ${JSON.stringify(args)}`)
   }
 }
+
+module.exports = (env !== 'test') ? (logger) : { info: () => {}, warn: () => {}, error: () => {} }

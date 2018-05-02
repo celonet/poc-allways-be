@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 dotenv.load()
 
 module.exports = {
+  env: process.env.NODE_ENV,
   app: {
     port: process.env.PORT
   },

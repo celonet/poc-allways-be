@@ -19,7 +19,7 @@ module.exports = async ({
       repository.count(query)
     ]);
 
-    return onSuccess({ cards: formatListCards(cards), total: count });
+    return onSuccess({ cards: formatListCards(cards), count });
   } catch (error) {
     logger.error('There is an error to get a list of cards', error);
     return onError(error);

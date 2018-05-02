@@ -3,25 +3,7 @@
 const cardRepository = require('../../api/repository/cards')
 const models = require('../../api/models')
 
-const generateCards = card => card.map(el => ([
-  { ...el, subject: 'Subject Test 1' },
-  { ...el, subject: 'Subject Test 2' },
-  { ...el, subject: 'Subject Test 3' },
-  { ...el, subject: 'Subject Test 4' },
-  { ...el, subject: 'Subject Test 5' },
-  { ...el, subject: 'Subject Test 6' }]))
-
-const create = async ({ model, data, quantity = 1, record = {} }) => {
-  if (quantity > 0) {
-    try {
-      record = await model.create(data[0])
-    } catch (error) {
-      console.log(error)
-    }
-    return create({ model, data: data.slice(1, data.length + 1), quantity: quantity - 1, record })
-  }
-  return record
-}
+const helpers = require('../helpers')
 
 describe('Integration tests', () => {
   describe('Card Repository', () => {
@@ -36,11 +18,11 @@ describe('Integration tests', () => {
       await models.Category.remove({})
       await models.Chapter.remove({})
 
-      const category = await create({
+      const category = await helpers.create({
         model: models.Category,
         data: [{ name: 'Category Test' }] })
 
-      const chapter = await create({
+      const chapter = await helpers.create({
         model: models.Chapter,
         data: [{ name: 'Chapter Test', initials: 'CT' }] })
 
@@ -50,13 +32,14 @@ describe('Integration tests', () => {
         chapter: chapter._id
       }
 
-      const listCards = generateCards([fullCard])[0]
+      const listCards = helpers.generateCards([fullCard])[0]
 
-      await create({
+      await helpers.create({
         model: models.Card,
         data: listCards,
         quantity: listCards.length + 1 })
     })
+
     test('Should to find one Card in the database by _id', async () => {
       const [record, ...data] = await card.findMany()
 
@@ -64,8 +47,9 @@ describe('Integration tests', () => {
       expect(result).toHaveProperty('subject', 'Subject Test 1')
       expect(result.chapter).toHaveProperty('name', 'Chapter Test')
       expect(result.chapter).toHaveProperty('initials', 'CT')
-      expect(result.category[0]).toHaveProperty('name', 'Category Test')
+      expect(result.category).toHaveProperty('name', 'Category Test')
     })
+
     test('Should to find all Cards in the database by description', async () => {
       const results = await card.findMany({ description: cardMock.description })
       expect(results.length).toEqual(6)
@@ -73,9 +57,10 @@ describe('Integration tests', () => {
         expect(result).toHaveProperty('subject', `Subject Test ${index + 1}`)
         expect(result.chapter).toHaveProperty('name', 'Chapter Test')
         expect(result.chapter).toHaveProperty('initials', 'CT')
-        expect(result.category[0]).toHaveProperty('name', 'Category Test')
+        expect(result.category).toHaveProperty('name', 'Category Test')
       })
     })
+
     test('Should to count number of Cards in the database by pagination', async () => {
       const [pageOne] = await card.findMany({ query: {}, page: 1, limit: 1, sort: { subject: 1 } })
       const [pageTwo] = await card.findMany({ query: {}, page: 2, limit: 1, sort: { subject: 1 } })

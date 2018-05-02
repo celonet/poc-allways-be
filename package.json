@@ -4,10 +4,11 @@
   "description": "Pock backend",
   "main": "server.js",
   "scripts": {
+    "prestart": "node ./scripts/seed",
     "start": "node server",
-    "test:coverage": "NODE_ENV=test jest --runInBand --coverage ./test/**/*.spec.js",
-    "test:unit": "NODE_ENV=test jest --coverage ./test/unit/*.spec.js",
-    "test:integration": "NODE_ENV=test jest --runInBand --coverage ./test/integration/*.spec.js",
+    "test:coverage": "NODE_ENV=test jest --runInBand --coverage --forceExit ./test/**/*.spec.js",
+    "test:unit": "NODE_ENV=test jest --coverage --forceExit ./test/unit/*.spec.js",
+    "test:integration": "NODE_ENV=test jest --runInBand --coverage --forceExit ./test/integration/*.spec.js",
     "test": "npm run test:coverage",
     "dev": "nodemon server",
     "lint": "eslint api/**/**/*.js",
@@ -18,19 +19,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "joi": "^13.1.2",
+    "joi-objectid": "^2.0.0",
     "moment": "^2.20.1",
     "mongodb": "^3.0.6",
     "mongoose": "^5.0.15",
-    "swagger-jsdoc": "^1.9.7",
-    "uuid": "^3.2.1"
+    "swagger-jsdoc": "^1.9.7"
   },
   "devDependencies": {
     "babel-eslint": "8.0.3",
     "babel-cli": "^6.24.1",
-    "chai": "^4.1.0",
     "eslint-config-airbnb-base": "^11.3.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "eslint": "^4.4.1",
@@ -40,12 +41,12 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
-    "mocha": "^4.0.1",
     "jest": "^22.4.3",
-    "nyc": "^11.3.0",
     "jest-context": "^2.1.0",
     "nodemon": "^1.12.1",
-    "sinon": "^4.2.2"
+    "sinon": "^4.2.2",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
   },
   "jest": {
     "verbose": true,

@@ -11,13 +11,10 @@ module.exports = async ({
   logger.info('Payload received', payload);
 
   try {
-    const { formatCard, formatResponse } = formatters;
-
+    const { formatCard } = formatters;
     await repository.insert(formatCard(payload));
 
-    return onSuccess(formatResponse(
-      { message: 'Card created with success', statusCode: 201 }
-    ));
+    return onSuccess();
   } catch (error) {
     logger.error('There is an error in the creation of cards', error);
     return onError(error);

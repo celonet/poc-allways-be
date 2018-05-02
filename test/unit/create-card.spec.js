@@ -15,14 +15,10 @@ describe('Unit tests', () => {
       insert: obj => obj
     },
     formatters: {
-      formatCard: createStub => createStub,
-      formatCreated: () => ({
-        status_code: 201,
-        message: 'Card created with success'
-      })
+      formatCard: createStub => createStub
     },
     payload: createStub,
-    onSuccess: msg => msg,
+    onSuccess: (data = {}) => ({ data, error: null}),
     onError: err => ({
       name: err.name || 'IntervalServerError',
       message: err.message || 'internal server error',
@@ -42,8 +38,8 @@ describe('Unit tests', () => {
       expect(mock.logger.info.called).toEqual(true)
       expect(mock.logger.info.calledOnce).toEqual(true)
 
-      expect(response.status_code).toEqual(201)
-      expect(response.message).toEqual('Card created with success')
+      expect(response.data).toEqual({})
+      expect(response.error).toEqual(null)
     })
 
     test('Should to return an error, Invalid Card', async () => {
